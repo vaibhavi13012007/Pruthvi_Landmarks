@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Pruthvi Landmarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root { --gold: linear-gradient(135deg,#c9a44c,#f5e28a,#c9a44c); }
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: radial-gradient(circle at top,#1a1a1a,#000);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .login-container { width: 420px; }
+
+    .login-box {
+      padding: 40px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(18px);
+      position: relative;
+      box-shadow: 0 12px 40px rgba(0,0,0,.35);
+    }
+
+    h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      background: var(--gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    p {
+      text-align: center;
+      opacity: .7;
+      margin-bottom: 24px;
+    }
+
+    .social-login a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 30px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: .3s ease;
+    }
+
+    .social-login a:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .google-btn { background:#fff; color:#000; }
+    .facebook-btn { background:#1877f2; color:#fff; }
+
+    .divider {
+      text-align: center;
+      margin: 20px 0;
+      opacity: .5;
+      font-size: .8rem;
+      letter-spacing: 1px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 14px 16px;
+      background: rgba(0,0,0,.4);
+      border-radius: 14px;
+      border: 1px solid #444;
+      color: #fff;
+      outline: none;
+      transition: .3s ease;
+    }
+
+    .input-box input:focus {
+      border-color: #d8bc67;
+      box-shadow: 0 0 0 3px rgba(201,164,76,.15);
+    }
+
+    .input-box input::placeholder {
+      color: rgba(255,255,255,.55);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      background: var(--gold);
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      color: #111;
+      transition: .3s ease;
+      margin-top: 6px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201,164,76,.25);
+    }
+
+    /* NEW BOTTOM LINKS */
+    .bottom-links {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+
+    .bottom-links a {
+      text-decoration: none;
+      color: #f5e28a;
+      transition: 0.3s ease;
+      font-weight: 500;
+    }
+
+    .bottom-links a:hover {
+      color: #fff;
+      text-shadow: 0 0 10px rgba(245,226,138,0.45);
+    }
+
+    .loader-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 22px;
+      z-index: 10;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,.2);
+      border-top: 3px solid #f5e28a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .login-container {
+        width: 92%;
+      }
+
+      .login-box {
+        padding: 28px 22px;
+      }
+
+      .bottom-links {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="login-container">
+  <div class="login-box">
+
+    <h2>Welcome Back</h2>
+    <p>Access your Pruthvi Landmarks account</p>
+
+    <!-- SOCIAL LOGIN -->
+    <div class="social-login">
+      <a class="google-btn" id="googleLogin">
+        <i class="fab fa-google"></i> Continue with Google
+      </a>
+      <a class="facebook-btn" id="facebookLogin">
+        <i class="fab fa-facebook-f"></i> Continue with Facebook
+      </a>
+    </div>
+
+    <div class="divider">OR</div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm">
+      <div class="input-box">
+        <input type="email" id="email" required placeholder="Email">
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="password" required placeholder="Password">
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">Login</button>
+    </form>
+
+    <!-- NEW BOTTOM LINKS -->
+    <div class="bottom-links">
+      <a href="forgot-password.html">Forgot Password?</a>
+      <a href="register.html">Create Account</a>
+    </div>
+
+    <!-- LOADER -->
+    <div class="loader-overlay" id="loader">
+      <div class="spinner"></div>
+      <p>Redirecting…</p>
+    </div>
+
+  </div>
+</div>
+
+<script src="./js/login.js" defer></script>
+</body>
+</html>

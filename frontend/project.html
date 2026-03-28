@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Projects | Pruthvi Landmarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Premium Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ScrollReveal -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+<link rel="stylesheet" href="./css/index.css">
+  <style>
+    :root {
+      --gold: linear-gradient(90deg, #d4af37, #f5e38c);
+      --glass: rgba(255,255,255,0.12);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0b1d26, #050b10);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    header {
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.85);
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      background: var(--gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .divider {
+      width: 120px;
+      height: 3px;
+      background: var(--gold);
+      margin: 20px auto;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #d4af37; }
+      to { box-shadow: 0 0 25px #f5e38c; }
+    }
+
+    /* PROJECT CARD */
+    .project-card {
+      background: var(--glass);
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.15);
+      overflow: hidden;
+      position: relative;
+      transition: all 0.5s ease;
+    }
+
+    /* 🔥 FIXED OVERLAY (no click blocking) */
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 22px;
+      padding: 1px;
+      background: var(--gold);
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+
+      pointer-events: none; /* ✅ IMPORTANT FIX */
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card:hover {
+      transform: translateY(-14px) scale(1.02);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+    }
+
+    .img-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .img-wrapper img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: opacity 0.4s ease, transform 0.6s ease;
+    }
+
+    .hover-img {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+    }
+
+    .project-card:hover .hover-img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .project-card:hover .main-img {
+      opacity: 0;
+    }
+
+    /* 🔥 ENSURE BUTTONS ARE CLICKABLE */
+    .card-body {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      background: var(--gold);
+      color: #000;
+      border-radius: 20px;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      border: none;
+      color: #000;
+      font-weight: 500;
+    }
+
+    #searchInput {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="sticky-top border-bottom bg-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-between py-3">
+
+      <!-- BRAND -->
+      <a href="index2.html" class="text-decoration-none">
+        <span class="fw-bold fs-4 text-primary">PRUTHVI LANDMARKS AND DEVELOPERS PRIVATE LIMITED</span>
+      </a>
+
+      <!-- NAV LINKS -->
+      <ul class="nav ms-4">
+        <li class="nav-item"><a href="index.html" class="nav-link px-3">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link px-3">About Us</a></li>
+        <li class="nav-item"><a href="project.html" class="nav-link px-3 fw-semibold">Projects</a></li>
+        <li class="nav-item"><a href="blogs.html" class="nav-link px-3">Blogs & Media</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link px-3">Contact Us</a></li>
+      </ul>
+
+      <!-- PROFILE DROPDOWN -->
+      <div class="dropdown">
+        <a href="#" role="button" class="d-block dropdown-toggle" data-bs-toggle="dropdown">
+          <img id="navbarProfileImg" src="https://via.placeholder.com/32" width="32" height="32" class="rounded-circle">
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a id="loginLink" class="dropdown-item" href="login.html">Login</a></li>
+          <li><a id="registerLink" class="dropdown-item" href="register.html">Register</a></li>
+          <li><a id="profileLink" class="dropdown-item d-none" href="profile.html">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a id="logoutBtn" class="dropdown-item d-none" href="#">Logout</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+<div class="container my-5 text-center">
+  <h2 class="page-title reveal">Our Signature Developments</h2>
+  <div class="divider"></div>
+  <p class="opacity-75 reveal">
+    Curated luxury residences and landmark commercial spaces.
+  </p>
+</div>
+
+<div class="container my-5">
+  <div id="projectList" class="row"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/project.js"></script>
+
+<script>
+  ScrollReveal().reveal('.reveal', { distance: '60px', duration: 1200 });
+  ScrollReveal().reveal('.project-card', { interval: 120 });
+</script>
+
+</body>
+</html>

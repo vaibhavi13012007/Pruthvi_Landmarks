@@ -1,0 +1,173 @@
+.hero-banner {
+    position: relative;
+}
+.hero-banner img, .hero-banner video {
+    width: 100%;
+    display: block;
+    height: auto;
+}
+
+
+:root {
+            --primary-color: #1a472a; /* Deep Green for Growth/Land */
+            --accent-color: #c5a059;  /* Gold for Luxury/Landmarks */
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2070') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Introduction Section --- */
+        .about-section {
+            padding: 80px 10%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 20px 20px 0px var(--accent-color);
+        }
+
+        .about-text h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        /* --- Stats Section --- */
+        .stats-container {
+            background: var(--primary-color);
+            padding: 60px 10%;
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            text-align: center;
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+        }
+
+        /* --- Mission & Vision --- */
+        .mission-vision {
+            padding: 80px 10%;
+            background: var(--bg-light);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: none;
+            background: #ddd;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Footer/CTA --- */
+        .cta-section {
+            padding: 60px 10%;
+            text-align: center;
+            background: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .about-section { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .stats-container { flex-direction: column; gap: 40px; }
+        }

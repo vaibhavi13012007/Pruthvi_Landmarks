@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pruthvi Landmarks | Ultra-Modern</title>
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- External CSS -->
+
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="sticky-top custom-header">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between py-3">
+
+      <a href="index.html" class="text-decoration-none">
+        <span class="brand">PRUTHVI LANDMARKS</span>
+      </a>
+
+      <ul class="nav">
+        <li class="nav-item"><a href="index.html" class="nav-link px-3">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link px-3">About</a></li>
+        <li class="nav-item"><a href="project.html" class="nav-link px-3">Projects</a></li>
+        <li class="nav-item"><a href="blogs.html" class="nav-link px-3">Blogs</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link px-3">Contact</a></li>
+      </ul>
+
+      <div class="dropdown">
+        <a href="#" data-bs-toggle="dropdown">
+          <img id="navbarProfileImg"
+               src="./assets/images/profile.jpg"
+               width="34" height="34" class="rounded-circle">
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end custom-dropdown">
+          <li><a id="loginLink" class="dropdown-item" href="login.html">Login</a></li>
+          <li><a id="registerLink" class="dropdown-item" href="register.html">Register</a></li>
+          <li><a id="profileLink" class="dropdown-item d-none" href="profile.html">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a id="logoutBtn" class="dropdown-item d-none" href="#">Logout</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-banner">
+  <video autoplay muted loop playsinline>
+    <source src="https://d3dy70zhjs5mi1.cloudfront.net/s3fs-public/2023-07/Orl%20Homepage%20Banner%20250723-1.m4v.mp4">
+  </video>
+
+  <div class="hero-overlay">
+    <div>
+      <h1>Building <span>Future-Ready</span><br>Landmarks</h1>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="floating-card">
+    <h3>13+ Years of Excellence</h3>
+    <p class="text-muted">Delivering iconic developments with uncompising quality.</p>
+  </div>
+</div>
+
+<!-- SERVICES / PANELS -->
+<section class="services-panels my-5">
+  <div class="container-fluid px-0">
+    <div class="panels-grid">
+      <div class="panel" id="panel-commercial">
+        <a class="panel-link" href="project.html#commercial" aria-label="Commercial projects">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="Commercial Projects">
+          <div class="panel-overlay"></div>
+          <h3 class="panel-title">Commercial</h3>
+          <p class="panel-sub">For 15 years we have worked on award-winning projects, one blueprint at a time. Our commercial projects house tens of thousands of people who appreciate the comfort of our spaces.</p>
+        </a>
+      </div>
+
+      <script>
+        // Toggle info section for Commercial panel on click
+        document.getElementById('panel-commercial').addEventListener('click', function(e) {
+          e.preventDefault();
+          this.classList.toggle('info-active');
+        });
+      </script>
+
+      <div class="panel" id="panel-residential">
+        <a class="panel-link" href="project.html#residential" aria-label="Residential projects">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop" alt="Residential Projects">
+          <div class="panel-overlay"></div>
+          <h3 class="panel-title">Residential</h3>
+          <p class="panel-sub">Landmark is known for its timely completion of projects coupled with its innovative crafting of spaces. Our completed projects are known for their visual aesthetic and comfort.</p>
+        </a>
+      </div>
+
+      <script>
+        // Toggle info section for Residential panel on click
+        document.getElementById('panel-residential').addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent immediate navigation to show the info
+          this.classList.toggle('info-active');
+        });
+      </script>
+
+      <div class="panel" id="panel-hotels">
+        <a class="panel-link" href="project.html#hotels" aria-label="Hotel projects">
+          <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="Hotel Projects">
+          <div class="panel-overlay"></div>
+          <h3 class="panel-title">Hotels</h3>
+          <p class="panel-sub">Landmark has built hotels managed by global brands like the Radisson and the Marriott. Our completed and ongoing projects are in cities pan-India.</p>
+        </a>
+      </div>
+
+      <script>
+        // Toggle info overlay for Hotels panel
+        document.getElementById('panel-hotels').addEventListener('click', function(e) {
+          e.preventDefault();
+          this.classList.toggle('info-active');
+        });
+      </script>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="container">
+  <hr class="footer-sep">
+  <footer class="row py-5 my-5 site-footer">
+    <div class="col-12 col-md-6 mb-4 footer-col">
+      <div class="footer-brand">
+        <span class="brand">PRUTHVI LANDMARKS</span>
+      </div>
+
+      <h5 class="footer-title mt-4">Company</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2"><a href="index.html" class="nav-link p-0">Home</a></li>
+        <li class="nav-item mb-2"><a href="about.html" class="nav-link p-0">About</a></li>
+        <li class="nav-item mb-2"><a href="project.html" class="nav-link p-0">Projects</a></li>
+        <li class="nav-item mb-2"><a href="blogs.html" class="nav-link p-0">Blogs</a></li>
+        <li class="nav-item mb-2"><a href="contact.html" class="nav-link p-0">Contact us</a></li>
+      </ul>
+    </div>
+
+    <div class="col-12 col-md-6 mb-4 footer-col">
+      <h5 class="footer-title">Sign Up for Updates</h5>
+      <form id="footerSubscribeForm" class="footer-form mt-3">
+        <div class="mb-3">
+          <input id="footerEmail" type="email" class="form-control footer-input" placeholder="Email Id" aria-label="Email" required>
+        </div>
+        <button class="btn footer-btn" type="submit">SUBMIT</button>
+        <p class="footer-msg mt-3 d-none" id="footerMsg">Thank You for subscribing.</p>
+      </form>
+    </div>
+  </footer>
+
+  <div class="footer-bottom text-center py-3">
+    <p class="mb-0">Copyright © Pruthvi Landmarks. All Rights Reserved.</p>
+  </div>
+</div>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- SAME FUNCTIONALITY JS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const login = document.getElementById("loginLink");
+  const register = document.getElementById("registerLink");
+  const profile = document.getElementById("profileLink");
+  const logout = document.getElementById("logoutBtn");
+  const avatar = document.getElementById("navbarProfileImg");
+
+  if (user) {
+    login.classList.add("d-none");
+    register.classList.add("d-none");
+    profile.classList.remove("d-none");
+    logout.classList.remove("d-none");
+
+    avatar.src = user.profileImage ||
+      `https://ui-avatars.com/api/?name=${user.name || "User"}&background=0b0f1f&color=fff`;
+  }
+
+  logout.addEventListener("click", () => {
+    localStorage.removeItem("user");
+    location.reload();
+  });
+
+  // Footer subscription form handling
+  const subscribeForm = document.getElementById('footerSubscribeForm');
+  const footerEmail = document.getElementById('footerEmail');
+  const footerMsg = document.getElementById('footerMsg');
+
+  if (subscribeForm) {
+    subscribeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = footerEmail.value.trim();
+      if (!val) {
+        footerMsg.textContent = 'Please enter email.';
+        footerMsg.classList.remove('d-none');
+        footerMsg.style.color = '#ff6b6b';
+        footerEmail.focus();
+        return;
+      }
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!re.test(val)) {
+        footerMsg.textContent = 'Please enter a valid email.';
+        footerMsg.classList.remove('d-none');
+        footerMsg.style.color = '#ff6b6b';
+        footerEmail.focus();
+        return;
+      }
+      footerMsg.textContent = 'Thank You for subscribing.';
+      footerMsg.classList.remove('d-none');
+      footerMsg.style.color = 'var(--muted)';
+      footerEmail.value = '';
+    });
+  }
+});
+</script>
+
+</body>
+</html>

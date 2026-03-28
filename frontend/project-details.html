@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Project Details | Pruthvi Landmarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Premium Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ScrollReveal for animations -->
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+    :root {
+      --primary-gold: #d4af37;
+      --secondary-gold: #f5e38c;
+      --glass-bg: rgba(255,255,255,0.05);
+      --card-shadow: rgba(0,0,0,0.4);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0b1d26, #050b10);
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h2, h5 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    a { text-decoration: none; color: var(--primary-gold); }
+    a:hover { color: var(--secondary-gold); }
+
+    /* --- Titles --- */
+    .project-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-subtitle {
+      text-align: center;
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      width: 140px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary-gold), var(--secondary-gold));
+      margin: 1rem auto 2rem auto;
+      border-radius: 5px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 8px var(--primary-gold); }
+      100% { box-shadow: 0 0 20px var(--secondary-gold); }
+    }
+
+    #projectStatus {
+      padding: 0.35rem 0.8rem;
+      font-weight: 500;
+      border-radius: 20px;
+      background: var(--primary-gold);
+      color: #000;
+      text-transform: capitalize;
+      display: inline-block;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    #projectStatus:hover { transform: scale(1.1); }
+
+    #projectDescription {
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      text-align: justify;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* --- Carousel --- */
+    .carousel-inner {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 15px 30px var(--card-shadow);
+    }
+
+    .carousel-item img {
+      object-fit: cover;
+      height: 400px;
+      transition: transform 0.6s ease, filter 0.6s ease;
+    }
+
+    .carousel-item img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.05);
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      filter: invert(100%);
+    }
+
+    /* --- Map --- */
+    #map {
+      border-radius: 15px;
+      box-shadow: 0 10px 20px var(--card-shadow);
+      transition: transform 0.3s ease;
+      border: none;
+    }
+
+    #map:hover { transform: scale(1.02); }
+
+    /* --- Fade-in Animations --- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    .fade-in.delay-1 { animation-delay: 0.2s; }
+    .fade-in.delay-2 { animation-delay: 0.4s; }
+    .fade-in.delay-3 { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container my-5">
+
+  <h2 id="projectTitle" class="project-title fade-in delay-1"></h2>
+  <p id="projectAddress" class="project-subtitle fade-in delay-2"></p>
+  <span id="projectStatus" class="fade-in delay-2"></span>
+  <p id="projectDescription" class="fade-in delay-3"></p>
+  <div class="divider fade-in delay-3"></div>
+
+  <!-- Carousel -->
+  <div id="carouselExample" class="carousel slide mb-4 fade-in delay-3">
+    <div class="carousel-inner" id="galleryInner"></div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Map -->
+  <h5 class="mt-5 fade-in delay-2">Location</h5>
+  <iframe id="map" width="100%" height="300" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="fade-in delay-2"></iframe>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+const galleryInner = document.getElementById("galleryInner");
+const projectTitle = document.getElementById("projectTitle");
+const projectAddress = document.getElementById("projectAddress");
+const projectStatus = document.getElementById("projectStatus");
+const projectDescription = document.getElementById("projectDescription");
+const mapFrame = document.getElementById("map");
+
+fetch(`http://localhost:5000/api/projects/${id}`)
+  .then(res => res.json())
+  .then(project => {
+    projectTitle.textContent = project.title;
+    projectAddress.textContent = project.address || "";
+    projectStatus.textContent = project.status;
+    projectDescription.textContent = project.description || "No description provided.";
+
+    // Gallery
+    if (project.photos && project.photos.length) {
+      project.photos.forEach((img, i) => {
+        galleryInner.innerHTML += `
+          <div class="carousel-item ${i===0 ? "active" : ""}">
+            <img src="http://localhost:5000/uploads/projects/${img}" class="d-block w-100">
+          </div>`;
+      });
+    } else {
+      galleryInner.innerHTML = `
+        <div class="carousel-item active">
+          <div class="text-center p-5 bg-secondary text-white rounded">
+            No images available
+          </div>
+        </div>`;
+    }
+
+    // Map
+    if (project.mapUrl) {
+      mapFrame.src = `https://www.google.com/maps?q=${encodeURIComponent(project.mapUrl)}&output=embed`;
+    } else {
+      mapFrame.style.display = "none";
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    projectTitle.textContent = "Failed to load project details.";
+  });
+
+// ScrollReveal animations
+ScrollReveal().reveal('.fade-in', {
+  distance: '60px',
+  duration: 1200,
+  easing: 'cubic-bezier(0.5,0,0,1)',
+  origin: 'bottom',
+  interval: 100
+});
+</script>
+</body>
+</html>

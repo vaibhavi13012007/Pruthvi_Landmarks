@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #141E30, #243B55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 460px;
+    padding: 20px;
+}
+
+.register-box {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(16px);
+    padding: 40px;
+    border-radius: 20px;
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.register-box h2 {
+    font-weight: 600;
+}
+
+.register-box p {
+    font-size: 14px;
+    opacity: 0.85;
+    margin-bottom: 30px;
+}
+
+/* Inputs */
+.input-box {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 35px 12px 5px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+}
+
+.input-box label {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.6);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-box input:focus + label,
+.input-box input:valid + label {
+    top: -10px;
+    font-size: 12px;
+    color: #00e6e6;
+}
+
+.toggle {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Password Strength */
+.strength {
+    text-align: left;
+    font-size: 12px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+}
+
+.strength span {
+    color: #00e6e6;
+    font-weight: 500;
+}
+
+/* Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #00e6e6, #00b3b3);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    opacity: 0.9;
+}
+
+/* Login link */
+.login-link {
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.login-link a {
+    color: #00e6e6;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}

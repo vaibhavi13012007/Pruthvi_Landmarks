@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Project | Pruthvi Landmarks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold:#d4af37;
+      --glass:rgba(255,255,255,0.08);
+    }
+
+    body {
+      margin:0;
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(120deg,#020617,#0f172a,#020617);
+      background-size:300% 300%;
+      animation:bgMove 18s ease infinite;
+      color:#fff;
+    }
+
+    @keyframes bgMove {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    .form-wrapper {
+      max-width: 900px;
+      margin: 60px auto;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border-radius: 25px;
+      padding: 45px;
+      border: 1px solid rgba(255,255,255,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-wrapper::before {
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:linear-gradient(120deg,transparent,var(--gold),transparent);
+      animation:borderFlow 6s linear infinite;
+      opacity:.4;
+    }
+
+    @keyframes borderFlow {
+      0%{transform:translateX(-100%)}
+      100%{transform:translateX(100%)}
+    }
+
+    .form-wrapper * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .form-header {
+      text-align:center;
+      margin-bottom:40px;
+    }
+
+    .form-header h2 {
+      font-family:'Playfair Display',serif;
+      color:var(--gold);
+      letter-spacing:1px;
+    }
+
+    .form-header p {
+      opacity:.8;
+      font-size:14px;
+    }
+
+    .brand-line {
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin:25px 0;
+    }
+
+    .brand-line span {
+      flex:1;
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    }
+
+    .form-control, select {
+      background:rgba(255,255,255,0.12);
+      border:none;
+      color:#fff;
+      padding:14px;
+      border-radius:14px;
+    }
+
+    .form-control::placeholder {
+      color:rgba(255,255,255,0.6);
+    }
+
+    .form-control:focus, select:focus {
+      box-shadow:0 0 0 2px rgba(212,175,55,.6);
+      background:rgba(255,255,255,0.15);
+      color:#fff;
+      outline:none;
+    }
+
+    select option {
+      color:#000;
+      background:#fff;
+    }
+
+    label {
+      margin-top:18px;
+      font-weight:500;
+      opacity:.85;
+    }
+
+    .btn-royal {
+      margin-top:30px;
+      background:linear-gradient(135deg,var(--gold),#facc15);
+      border:none;
+      padding:16px;
+      border-radius:30px;
+      font-weight:600;
+      color:#000;
+      box-shadow:0 12px 30px rgba(212,175,55,.5);
+      transition:.4s;
+    }
+
+    .btn-royal:hover {
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(212,175,55,.8);
+    }
+
+    .info-box {
+      margin-top:35px;
+      background:rgba(255,255,255,0.06);
+      padding:25px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+
+    .info-box h6 {
+      color:var(--gold);
+      font-family:'Playfair Display',serif;
+      margin-bottom:10px;
+    }
+
+    .info-box li {
+      font-size:14px;
+      opacity:.85;
+      margin-bottom:6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="form-wrapper">
+
+  <!-- HEADER -->
+  <div class="form-header">
+    <h2>🏗️ Add New Project</h2>
+    <p>Define luxury. Build landmarks. Deliver excellence.</p>
+  </div>
+
+  <div class="brand-line">
+    <span></span>
+    <i class="bi bi-buildings"></i>
+    <span></span>
+  </div>
+
+  <!-- FORM -->
+  <form id="projectForm" enctype="multipart/form-data">
+
+    <input class="form-control mb-3" name="title" placeholder="Project Name" required>
+
+    <input class="form-control mb-3" name="site" placeholder="Site / Area">
+
+    <input class="form-control mb-3" name="address" placeholder="Full Address">
+
+    <textarea class="form-control mb-3" name="description" placeholder="Project Description"></textarea>
+
+    <textarea class="form-control mb-3" name="updates" placeholder="Construction Updates / Highlights"></textarea>
+
+    <label>📸 Project Photos</label>
+    <input class="form-control mb-3" type="file" name="photos" multiple>
+
+    <label>🎥 Video URLs (comma separated)</label>
+    <input type="text" id="videos" class="form-control mb-3"
+           placeholder="https://youtube.com/..., video.mp4">
+
+    <label>🖼️ Cover Image</label>
+    <input class="form-control mb-3" type="file" name="coverImage" required>
+
+    <label>📌 Project Status</label>
+    <select class="form-control mb-3" name="status" id="status" required>
+      <option value="" selected disabled>Select Project Status</option>
+      <option value="ongoing">Ongoing</option>
+      <option value="completed">Completed</option>
+      <option value="upcoming">Upcoming</option>
+    </select>
+
+    <label>📍 Google Maps Location</label>
+    <input
+      type="url"
+      name="mapUrl"
+      class="form-control mb-3"
+      placeholder="https://maps.app.goo.gl/..."
+    >
+
+    <button type="submit" class="btn btn-royal w-100">
+      ➕ Add Premium Project
+    </button>
+
+  </form>
+
+  <!-- INFO -->
+  <div class="info-box">
+    <h6>✨ Project Publishing Tips</h6>
+    <ul>
+      <li>Use high-resolution images for better presentation</li>
+      <li>Add progress updates regularly for trust & transparency</li>
+      <li>Ensure accurate Google Maps location</li>
+      <li>Premium projects attract higher engagement</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- SCRIPTS -->
+<script src="./admin/js/admin-auth.js"></script>
+<script src="./admin/js/projects.js"></script>
+<script src="./js/add-project.js"></script>
+
+</body>
+</html>

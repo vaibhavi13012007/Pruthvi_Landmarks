@@ -1,0 +1,134 @@
+:root{
+  --bg:#05070f;
+  --glass:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --accent:linear-gradient(135deg,#4facfe,#7f5cff,#00f2fe);
+  --muted:#9aa4b2;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:#fff;
+}
+
+/* HEADER */
+.custom-header{
+  backdrop-filter:blur(16px);
+  background:rgba(5,7,15,.75);
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  font-family:'Syne',sans-serif;
+  font-size:1.6rem;
+  background:var(--accent);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.nav-link{
+  color:#fff !important;
+  opacity:.75;
+  transition:.3s;
+}
+
+.nav-link:hover{
+  opacity:1;
+  transform:translateY(-2px);
+}
+
+/* DROPDOWN */
+.custom-dropdown{
+  background:#0b0f1f;
+  border:1px solid var(--border);
+}
+
+.dropdown-item{
+  color:#fff;
+}
+
+.dropdown-item:hover{
+  background:rgba(255,255,255,.08);
+}
+
+/* HERO */
+.hero-banner{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.hero-banner video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.45);
+}
+
+.hero-overlay{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero-overlay h1{
+  font-family:'Syne',sans-serif;
+  font-size:4rem;
+}
+
+.hero-overlay h1 span{
+  background:var(--accent);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero-overlay p{
+  max-width:720px;
+  margin:20px auto;
+  color:var(--muted);
+}
+
+.glow-line{
+  width:140px;
+  height:4px;
+  margin:25px auto;
+  background:var(--accent);
+  border-radius:20px;
+  box-shadow:0 0 20px rgba(79,172,254,.8);
+}
+
+/* FLOAT CARD */
+.floating-card{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:35px;
+  margin-top:-120px;
+  text-align:center;
+}
+
+/* FOOTER */
+footer{
+  margin-top:120px;
+  border-top:1px solid var(--border);
+}
+
+footer a{
+  color:var(--muted);
+  text-decoration:none;
+  transition:.3s;
+}
+
+footer a:hover{
+  color:#fff;
+  padding-left:6px;
+}

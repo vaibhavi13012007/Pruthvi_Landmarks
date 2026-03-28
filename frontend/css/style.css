@@ -1,0 +1,4 @@
+body { font-family: Arial; background: #f4f4f4; }
+header { background: #2c3e50; color: white; padding: 10px; }
+nav a { color: white; margin: 10px; text-decoration: none; }
+.hero { padding: 50px; background: #bdc3c7; text-align: center; }
