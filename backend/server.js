@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
 const path = require("path");
+const fs = require("fs");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +16,13 @@ if (!MONGO_URI) {
   console.error("❌ MONGO_URI is missing in environment variables");
   process.exit(1);
 }
+
+/* ================== DEBUG LOGS ================== */
+console.log("🔍 MONGO_URI exists:", !!MONGO_URI);
+console.log(
+  "🔍 MONGO_URI preview:",
+  MONGO_URI ? MONGO_URI.substring(0, 30) + "..." : "NOT FOUND"
+);
 
 /* ================== PASSPORT ================== */
 const hasGoogleOAuth =
@@ -30,20 +38,31 @@ if (hasGoogleOAuth) {
 }
 
 /* ================== MIDDLEWARE ================== */
-app.use(cors({
-  origin: true, // allow frontend origin dynamically
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ================== STATIC FOLDERS ================== */
+const uploadsPath = path.join(__dirname, "uploads");
+const frontendPath = path.join(__dirname, "../frontend");
+
+// Ensure uploads folder exists
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+  console.log("📁 uploads folder created");
+}
+
 // Uploaded files
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(uploadsPath));
 
 // Frontend files
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(frontendPath));
 
 /* ================== API ROUTES ================== */
 app.use("/api/auth", require("./routes/authRoutes"));
@@ -58,43 +77,43 @@ app.use("/api/blogs", require("./routes/blogRoutes"));
 
 /* ================== FRONTEND ROUTES ================== */
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "about.html"));
+  res.sendFile(path.join(frontendPath, "about.html"));
 });
 
 app.get("/contact", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "contact.html"));
+  res.sendFile(path.join(frontendPath, "contact.html"));
 });
 
 app.get("/projects", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "project.html"));
+  res.sendFile(path.join(frontendPath, "project.html"));
 });
 
 app.get("/blogs", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "blogs.html"));
+  res.sendFile(path.join(frontendPath, "blogs.html"));
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "login.html"));
+  res.sendFile(path.join(frontendPath, "login.html"));
 });
 
 app.get("/register", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "register.html"));
+  res.sendFile(path.join(frontendPath, "register.html"));
 });
 
 app.get("/profile", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "profile.html"));
+  res.sendFile(path.join(frontendPath, "profile.html"));
 });
 
 app.get("/add-project", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "add-project.html"));
+  res.sendFile(path.join(frontendPath, "add-project.html"));
 });
 
 app.get("/project-details", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend", "project-details.html"));
+  res.sendFile(path.join(frontendPath, "project-details.html"));
 });
 
 /* ================== 404 HANDLER ================== */
@@ -102,28 +121,33 @@ app.use((req, res) => {
   if (req.originalUrl.startsWith("/api")) {
     return res.status(404).json({
       success: false,
-      error: "API Route Not Found"
+      error: "API Route Not Found",
     });
   }
 
-  // fallback for frontend routes
-  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+  // Frontend fallback
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 /* ================== GLOBAL ERROR HANDLER ================== */
 app.use((err, req, res, next) => {
-  console.error("❌ Server Error:", err.stack);
+  console.error("❌ Server Error:", err.stack || err.message);
 
-  res.status(err.status || 500).json({
-    success: false,
-    error: err.message || "Internal Server Error"
-  });
+  if (req.originalUrl.startsWith("/api")) {
+    return res.status(err.status || 500).json({
+      success: false,
+      error: err.message || "Internal Server Error",
+    });
+  }
+
+  res.status(err.status || 500).send("Internal Server Error");
 });
 
 /* ================== DATABASE CONNECTION ================== */
-mongoose.connect(MONGO_URI, {
-  serverSelectionTimeoutMS: 10000, // fail faster if DB is unreachable
-})
+mongoose
+  .connect(MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+  })
   .then(() => {
     console.log("✅ MongoDB Connected");
 
@@ -136,7 +160,7 @@ mongoose.connect(MONGO_URI, {
     process.exit(1);
   });
 
-/* ================== HANDLE UNCAUGHT ERRORS ================== */
+/* ================== HANDLE PROCESS ERRORS ================== */
 process.on("unhandledRejection", (err) => {
   console.error("❌ Unhandled Rejection:", err.message);
   process.exit(1);
