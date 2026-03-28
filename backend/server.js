@@ -7,6 +7,15 @@ require("dotenv").config();
 
 const app = express();
 
+/* ================== ENV CHECK ================== */
+const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is missing in environment variables");
+  process.exit(1);
+}
+
 /* ================== PASSPORT ================== */
 const hasGoogleOAuth =
   process.env.GOOGLE_CLIENT_ID &&
@@ -22,7 +31,7 @@ if (hasGoogleOAuth) {
 
 /* ================== MIDDLEWARE ================== */
 app.use(cors({
-  origin: true,
+  origin: true, // allow frontend origin dynamically
   credentials: true,
 }));
 
@@ -90,28 +99,50 @@ app.get("/project-details", (req, res) => {
 
 /* ================== 404 HANDLER ================== */
 app.use((req, res) => {
-  // If API route not found
   if (req.originalUrl.startsWith("/api")) {
     return res.status(404).json({
+      success: false,
       error: "API Route Not Found"
     });
   }
 
-  // If normal frontend route not found
-  res.status(404).sendFile(path.join(__dirname, "../frontend", "index.html"));
+  // fallback for frontend routes
+  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+});
+
+/* ================== GLOBAL ERROR HANDLER ================== */
+app.use((err, req, res, next) => {
+  console.error("❌ Server Error:", err.stack);
+
+  res.status(err.status || 500).json({
+    success: false,
+    error: err.message || "Internal Server Error"
+  });
 });
 
 /* ================== DATABASE CONNECTION ================== */
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URI, {
+  serverSelectionTimeoutMS: 10000, // fail faster if DB is unreachable
+})
   .then(() => {
     console.log("✅ MongoDB Connected");
-
-    const PORT = process.env.PORT || 5000;
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
     });
   })
-  .catch(err => {
-    console.error("❌ MongoDB Connection Failed:", err);
+  .catch((err) => {
+    console.error("❌ MongoDB Connection Failed:", err.message);
+    process.exit(1);
   });
+
+/* ================== HANDLE UNCAUGHT ERRORS ================== */
+process.on("unhandledRejection", (err) => {
+  console.error("❌ Unhandled Rejection:", err.message);
+  process.exit(1);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("❌ Uncaught Exception:", err.message);
+  process.exit(1);
+});
